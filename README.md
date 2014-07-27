@@ -20,7 +20,7 @@ This project is meant to be an introduction to Rails "best practices" as well as
 
 3. Install the necessary Ruby gems by running
 
-   ```console
+   ```shell-session
    $ bundle install --without production
    ```
 
@@ -28,7 +28,7 @@ This project is meant to be an introduction to Rails "best practices" as well as
 
 4. Create a `database.yml` file by copying the example SQLite3 configuration file
 
-   ```console
+   ```shell-session
    $ cp config/database.sqlite3.yml config/database.yml
    ```
 
@@ -36,13 +36,13 @@ This project is meant to be an introduction to Rails "best practices" as well as
 
 5. Create an empty database by running
 
-   ```console
+   ```shell-session
    $ bundle exec rake db:setup
    ```
 
 6. Create a `.env` file by copying the example file
 
-   ```console
+   ```shell-session
    $ cp .env.example .env
    ```
 
@@ -50,7 +50,7 @@ This project is meant to be an introduction to Rails "best practices" as well as
 
 7. Run the Rails application with
 
-   ```console
+   ```shell-session
    $ bundle exec rails server
    ```
 
