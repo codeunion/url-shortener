@@ -2,6 +2,10 @@
 
 This is a small-but-functional URL Shortener.  Your job is to make it _more_ functional!
 
+## Project Objectives
+
+See the [project wiki](http://github.com/codeunion/url-shortener/wiki) for details about what you should work on.
+
 This project is meant to be an introduction to Rails "best practices" as well as an overview of the major moving parts of Rails.  Take the time to look at all the various components, especially
 
 - The routing file at `routes.rb`
