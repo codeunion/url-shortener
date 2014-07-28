@@ -52,10 +52,16 @@ This project is meant to be an introduction to Rails "best practices" as well as
 
    **Note**: We've added `.env` to the `.gitignore` file, which is standard practice.  The `.env` file is meant to contain environment-specific information, e.g., an API key belonging to a particular developer. In production, you'll use `heroku set` and `heroku config` to configure environment variables.
 
-7. Run the Rails application with
+7. Create the `config/secrets.yml` file, which contains the secret token used to cryptographically sign your application's sessions.  Run:
+
+   ```shell-session
+   $ rake secret:create_file
+   ```
+
+8. Run the Rails application with
 
    ```shell-session
    $ bundle exec rails server
    ```
 
-8. Visit [http://localhost:30000](http://localhost:3000) in your browser.
+9. Visit [http://localhost:30000](http://localhost:3000) in your browser.
