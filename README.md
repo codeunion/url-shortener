@@ -64,4 +64,4 @@ This project is meant to be an introduction to Rails "best practices" as well as
    $ bundle exec rails server
    ```
 
-9. Visit [http://localhost:30000](http://localhost:3000) in your browser.
+9. Visit [http://localhost:3000](http://localhost:3000) in your browser.
