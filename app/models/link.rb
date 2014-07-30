@@ -1,6 +1,8 @@
 class Link < ActiveRecord::Base
   before_create :set_short_name
 
+  belongs_to :user
+
   validates :url, :presence => true
   validates :clicks_count, numericality: { only_integer: true }
 
