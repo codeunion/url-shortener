@@ -10,12 +10,20 @@ require 'active_support/core_ext/string'
 namespace :secret do
   desc "Generate a secure config/secrets.yml"
   task :create_file do
+    secrets_file = Rails.root.join('config', 'secrets.yml')
+
+    if File.exist?(secrets_file)
+      puts "Error: config/secrets.yml already exists."
+      puts "If you REALLY want to overwrite it, delete the file first."
+      exit 1
+    end
+
     development_secret = SecureRandom.hex(64)
     test_secret = SecureRandom.hex(64)
 
     puts "Creating config/secrets.yml..."
 
-    File.open(Rails.root.join('config', 'secrets.yml'), 'w') do |f|
+    File.open(secrets_file, 'w') do |f|
       f.puts <<-YML.strip_heredoc
         development:
           secret_key_base: #{development_secret}
