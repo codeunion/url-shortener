@@ -22,4 +22,18 @@ RSpec.describe Link, :type => :model do
       expect(link.to_param).to eq(link.short_name)
     end
   end
+
+  describe '#clicked!' do
+    let(:link) { FactoryGirl.build(:link) }
+
+    it 'increments clicks_count'do
+      expect {
+        link.clicked!
+      }.to change(link, :clicks_count).by(1)
+    end
+  end
+
+  describe 'validate numericality_of clicks_count' do
+    it { should validate_numericality_of(:clicks_count) }
+  end
 end
