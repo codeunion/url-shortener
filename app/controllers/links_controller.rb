@@ -9,7 +9,7 @@ class LinksController < ApplicationController
   def show
     @link = Link.find_by_short_name(params[:short_name])
 
-    if @link
+    if @link.link_clicked!
       redirect_to @link.url
     else
       render text: "No such link.", status: 404
