@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_filter :authorize, except: [:index]
+  #before_filter :authorize, except: [:index, :new]
   # GET /links
   def index
     @links = Link.order('created_at DESC')

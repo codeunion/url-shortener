@@ -39,8 +39,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :users
-  resources :sessions
+  resources :users, only: [:index, :new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for
