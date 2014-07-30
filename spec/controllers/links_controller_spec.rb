@@ -53,6 +53,12 @@ RSpec.describe LinksController, :type => :controller do
       get :show, {:short_name => link.to_param}, valid_session
       expect(response).to redirect_to(link.url)
     end
+
+    it "increments the value of clicks_count" do
+      link = Link.create! valid_attributes
+      get :show, {:short_name => link.to_param}, valid_session
+      expect(link.link_clicked!).to eq(link.clicks_count == 1)
+    end
   end
 
   describe "GET new" do
