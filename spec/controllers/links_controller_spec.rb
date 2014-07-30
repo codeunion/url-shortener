@@ -57,7 +57,9 @@ RSpec.describe LinksController, :type => :controller do
     it "increments the value of clicks_count" do
       link = Link.create! valid_attributes
       get :show, {:short_name => link.to_param}, valid_session
-      expect(link.link_clicked!).to eq(link.clicks_count == 1)
+      expect {
+        link.clicked!
+      }.to change(link, :clicks_count).by(1)
     end
   end
 

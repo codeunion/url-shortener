@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
     self.short_name
   end
 
-  def link_clicked!
+  def clicked!
     update_attributes(clicks_count: clicks_count + 1)
   end
 
