@@ -51,7 +51,16 @@ RSpec.describe LinksController, :type => :controller do
     it "redirects to the link's URL" do
       link = Link.create! valid_attributes
       get :show, {:short_name => link.to_param}, valid_session
+
       expect(response).to redirect_to(link.url)
+    end
+
+    it "increments the link's click count" do
+      link = Link.create! valid_attributes
+
+      expect {
+        get :show, {:short_name => link.to_param}, valid_session
+      }.to change { link.reload.clicks_count }.by(1)
     end
   end
 

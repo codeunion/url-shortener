@@ -11,15 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725003600) do
+ActiveRecord::Schema.define(version: 20140730203645) do
 
   create_table "links", force: true do |t|
     t.string   "short_name"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "clicks_count", default: 0, null: false
   end
 
   add_index "links", ["short_name"], name: "index_links_on_short_name", unique: true
+
+  create_table "users", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

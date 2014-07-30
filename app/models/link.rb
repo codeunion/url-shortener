@@ -2,9 +2,14 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
+  validates :clicks_count, :numericality => {:only_integer => true}
 
   def to_param
     self.short_name
+  end
+
+  def click!
+    update_attributes(:clicks_count => clicks_count + 1)
   end
 
   private
