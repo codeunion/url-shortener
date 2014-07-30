@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post '/links',         to: 'links#create', as: 'links'
   get  '/l/:short_name', to: 'links#show',   as: 'link'
 
-  get 'signup', to: 'users#new', as: 'signup'
+  get 'register', to: 'users#new', as: 'register'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
