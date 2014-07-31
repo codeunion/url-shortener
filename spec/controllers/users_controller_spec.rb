@@ -5,12 +5,12 @@ RSpec.describe UsersController, :type => :controller do
   let(:invalid_user) do
     {email: ""}
     {password: "123"}
-    {password_confirmation: "password"}
+    {password_confirmation: "secret"}
   end
 
   describe "GET new" do
     it "assigns a new user as @user" do
-      get :new, {}
+      get :new
       expect(assigns(:user)).to be_a_new(User)
     end
   end
@@ -47,5 +47,4 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
   end
-
 end
