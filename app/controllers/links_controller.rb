@@ -6,10 +6,20 @@ class LinksController < ApplicationController
 
   # GET /l/:short_name
   # See routes.rb for how this is set up.
+  def clicked!
+    @link = Link.find_by_short_name(params[:short_name])
+    if @link
+      @link.clicks_count += 1
+    else
+      render text: "No such link.", status: 404
+    end
+  end
+
   def show
     @link = Link.find_by_short_name(params[:short_name])
 
     if @link
+      @link.clicked!
       redirect_to @link.url
     else
       render text: "No such link.", status: 404
