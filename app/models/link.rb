@@ -12,6 +12,10 @@ class Link < ActiveRecord::Base
     self.short_name
   end
 
+  def clicked!
+    update_attributes(clicks_count: clicks_count + 1)
+  end
+
   private
   def set_short_name
     # Generate and assign a random short_name unless one has already been set.
