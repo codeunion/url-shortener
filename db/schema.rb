@@ -11,15 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725003600) do
+ActiveRecord::Schema.define(version: 20140730175332) do
 
-  create_table "links", force: true do |t|
-    t.string   "short_name"
-    t.string   "url"
+# Could not dump table "links" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "links", ["short_name"], name: "index_links_on_short_name", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
