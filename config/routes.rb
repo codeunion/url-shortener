@@ -3,12 +3,12 @@
 #
 # In Rails, the routing table is all in one place (here) and the code to call
 # lives in the instance methods of various controllers, e.g., LinksController#show.
-# In Sinatra, the routing able is spread across all the various calls to get(),
+# In Sinatra, the routing table is spread across all the various calls to get(),
 # post(), and so on and the code to call lives right next to its associated
 # route.
 #
 # !!!IMPORTANT!!!
-# Run "rake routes" to Rails' current picture of the routing table.
+# Run "rake routes" to see Rails' current picture of the routing table.
 # !!!IMPORTANT!!!
 
 Rails.application.routes.draw do
