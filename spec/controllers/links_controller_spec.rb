@@ -58,8 +58,7 @@ RSpec.describe LinksController, :type => :controller do
       link = Link.create! valid_attributes
       expect {
         get :show, {:short_name => link.to_param}, valid_session
-        link.reload
-      }.to change(link, :clicks_count).by(1)
+      }.to change{ link.reload.clicks_count }.by(1)
     end
   end
 

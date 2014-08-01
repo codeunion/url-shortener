@@ -2,7 +2,7 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
-  validates :clicks_count, :presence => true
+  validates :clicks_count, :presence => true, numericality: { only_integer: true }
 
   # This controls how an ActiveRecord object is displayed in a URL context.
   # This way, if we do link_path(@link), Rails will generate a path like

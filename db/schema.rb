@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140731014043) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "clicks_count", default: 0
+    t.integer  "clicks_count", default: 0, null: false
   end
 
   add_index "links", ["short_name"], name: "index_links_on_short_name", unique: true
