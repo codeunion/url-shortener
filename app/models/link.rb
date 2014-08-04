@@ -2,6 +2,7 @@ class Link < ActiveRecord::Base
   before_create :set_short_name
 
   validates :url, :presence => true
+  validates :clicks_count, :presence => true, numericality: { only_integer: true }
 
   # This controls how an ActiveRecord object is displayed in a URL context.
   # This way, if we do link_path(@link), Rails will generate a path like
@@ -9,6 +10,10 @@ class Link < ActiveRecord::Base
   # See: http://apidock.com/rails/ActiveRecord/Integration/to_param
   def to_param
     self.short_name
+  end
+
+  def clicked!
+    update_attributes(clicks_count: clicks_count + 1)
   end
 
   private
