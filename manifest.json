@@ -1,0 +1,10 @@
+{
+  "category": "project",
+  "tags": [
+    "ruby",
+    "rails",
+    "building-crud-web-apps",
+    "authentication"
+  ],
+  "notes": "Instructions are in wiki, not README. Bundles project and starter code."
+}
