@@ -23,7 +23,7 @@
         <td><%= link_url(link) %></td>
         <td><%= link.url %></td>
         <td><%= link.clicks_count %></td>
-        <td><%= link_to 'Visit link', link %></td>
+        <td><%= link_to 'Visit link', link, :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
