@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  before_create :set_short_name
+  before_create :set_short_name, :build_url, :validate_url
 
   validates :url, :presence => true
 
@@ -24,19 +24,39 @@ class Link < ActiveRecord::Base
   end
 
   private
-  def set_short_name
-    # Generate and assign a random short_name unless one has already been set.
-    return self.short_name if self.short_name.present?
 
-    # See: http://www.ruby-doc.org/stdlib-2.1.2/libdoc/securerandom/rdoc/SecureRandom.html#method-c-urlsafe_base64
-    # We do this to ensure we're not creating two links with the same short_name
-    # Since it's randomly generated and not user-supplied, we can't rely on
-    # validations to do this for us.
-    try_short_name = SecureRandom.urlsafe_base64(6)
-    while Link.where(:short_name => try_short_name).any?
-      try_short_name = SecureRandom.urlsafe_base64(6)
+    def validate_url
+      uri = URI.parse(url)
+      puts "got here?"
+      if %w(http https).include?(uri.scheme)
+        return true
+      else
+        uri_error
+      end
+    rescue URI::BadURIError
+      uri_error
+    rescue URI::InvalidURIError
+      uri_error
     end
 
-    self.short_name = try_short_name
-  end
+    def uri_error
+      self.errors.add(:url, 'is not a valid URL')
+      false
+    end
+
+    def set_short_name
+      # Generate and assign a random short_name unless one has already been set.
+      return self.short_name if self.short_name.present?
+
+      # See: http://www.ruby-doc.org/stdlib-2.1.2/libdoc/securerandom/rdoc/SecureRandom.html#method-c-urlsafe_base64
+      # We do this to ensure we're not creating two links with the same short_name
+      # Since it's randomly generated and not user-supplied, we can't rely on
+      # validations to do this for us.
+      try_short_name = SecureRandom.urlsafe_base64(6)
+      while Link.where(:short_name => try_short_name).any?
+        try_short_name = SecureRandom.urlsafe_base64(6)
+      end
+
+      self.short_name = try_short_name
+    end
 end
