@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  before_create :set_short_name, :build_url, :validate_url
+  before_create :set_short_name, :validate_url!
 
   validates :url, :presence => true
 
@@ -25,18 +25,18 @@ class Link < ActiveRecord::Base
 
   private
 
-    def validate_url
+    ### IS IT WRONG FOR A VALIDATION TO CHANGE DATA LIKE THIS?
+    def validate_url!
       uri = URI.parse(url)
-      puts "got here?"
-      if %w(http https).include?(uri.scheme)
-        return true
-      else
-        uri_error
-      end
+      add_scheme_to_url_if_none!(uri)
     rescue URI::BadURIError
       uri_error
     rescue URI::InvalidURIError
       uri_error
+    end
+
+    def add_scheme_to_url_if_none!(uri)
+      url.prepend("http://") unless (uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS))
     end
 
     def uri_error
