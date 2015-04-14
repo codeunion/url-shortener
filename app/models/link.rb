@@ -26,7 +26,6 @@ class Link < ActiveRecord::Base
   end
 
   private
-    ### NOT WORKING?
     def validate_url_and_prepend_scheme_if_none!
       uri = URI.parse(url)
       url.prepend("http://") unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
