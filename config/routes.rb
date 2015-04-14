@@ -12,9 +12,19 @@
 # !!!IMPORTANT!!!
 
 Rails.application.routes.draw do
+  root to: 'links#index'
+  get     '/links/new',        to: 'links#new',    as: 'new_link'
+  post    '/links',            to: 'links#create', as: 'links'
+  get     '/l/:short_name',    to: 'links#show',   as: 'link'
+  delete  '/l/:short_name',    to: 'links#destroy'
+
+  get '/login',                to: 'sessions#new'
+  post '/login',               to: 'sessions#create'
+  delete '/logout',            to: 'sessions#destroy'
+
+  resources :users
+
   # Often you'll see this:
-  #
-  #   resources :links
   #
   # This is short-hand for the following routes:
   #
@@ -29,12 +39,7 @@ Rails.application.routes.draw do
   #
   # For our first application, we can only create and view links,
   # so these will be our routes.
-
-  root to: 'links#index'
-  get  '/links/new',     to: 'links#new',    as: 'new_link'
-  post '/links',         to: 'links#create', as: 'links'
-  get  '/l/:short_name', to: 'links#show',   as: 'link'
-
+  #
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for
   # "to: 'links#show'" tells Rails to call the show method on links_controller
