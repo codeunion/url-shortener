@@ -12,8 +12,12 @@
 # !!!IMPORTANT!!!
 
 Rails.application.routes.draw do
+  get '/login',             to: 'sessions#new'
+  post '/login',            to: 'sessions#create'
+  get '/logout',            to: 'sessions#destroy'
+  resources :links, :users
+
   # Often you'll see this:
-     resources :links, :users
   #
   # This is short-hand for the following routes:
   #
