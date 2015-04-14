@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  before_create :set_short_name, :validate_url!
+  before_validation :set_short_name, :validate_url_and_prepend_scheme_if_none!
 
   validates :url, :presence => true
 
@@ -24,24 +24,28 @@ class Link < ActiveRecord::Base
   end
 
   private
+    # if valid_uri?(uri)
+    #   if uri has no scheme
+    #     uri = prepend http
+    #     if !valid_uri?(uri)
+    #       error
+    #     end
+    # else
+    #   error
+    # end
 
-    ### IS IT WRONG FOR A VALIDATION TO CHANGE DATA LIKE THIS?
-    def validate_url!
+    # def url_must_be_well_formed
+    #   uri = URI.parse(url)
+    # rescue URI::BadURIError, URI::InvalidURIError
+    #   self.errors.add(:url, 'is not a valid URL')
+    # end
+
+    # NOT WORKING
+    def validate_url_and_prepend_scheme_if_none!
       uri = URI.parse(url)
-      add_scheme_to_url_if_none!(uri)
-    rescue URI::BadURIError
-      uri_error
-    rescue URI::InvalidURIError
-      uri_error
-    end
-
-    def add_scheme_to_url_if_none!(uri)
-      url.prepend("http://") unless (uri.kind_of?(URI::HTTP) or uri.kind_of?(URI::HTTPS))
-    end
-
-    def uri_error
+      url.prepend("http://") unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
+    rescue URI::BadURIError, URI::InvalidURIError
       self.errors.add(:url, 'is not a valid URL')
-      false
     end
 
     def set_short_name

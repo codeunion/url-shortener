@@ -1,7 +1,7 @@
-<%= form_for(@link) do |f| %>
+<%= form_for @link do |f| %>
   <% if @link.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+      <h2><%= pluralize(@link.errors.count, "error") %> found:</h2>
 
       <ul>
       <% @link.errors.full_messages.each do |message| %>

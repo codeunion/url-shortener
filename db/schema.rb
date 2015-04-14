@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403233303) do
+ActiveRecord::Schema.define(version: 20150412214410) do
 
   create_table "links", force: :cascade do |t|
     t.string   "short_name"
@@ -19,8 +19,19 @@ ActiveRecord::Schema.define(version: 20150403233303) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "clicks_count", default: 0, null: false
+    t.integer  "user_id"
   end
 
   add_index "links", ["short_name"], name: "index_links_on_short_name", unique: true
+  add_index "links", ["user_id"], name: "index_links_on_user_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

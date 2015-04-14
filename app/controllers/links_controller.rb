@@ -34,8 +34,8 @@ class LinksController < ApplicationController
   end
 
   private
-  # Only allow a trusted parameter "white list" through.
-  def link_params
-    params.require(:link).permit(:url)
-  end
+    # Only allow a trusted parameter "white list" through.
+    def link_params
+      params.require(:link).permit(:url)
+    end
 end

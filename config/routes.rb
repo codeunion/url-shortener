@@ -13,8 +13,7 @@
 
 Rails.application.routes.draw do
   # Often you'll see this:
-  #
-  #   resources :links
+     resources :links, :users
   #
   # This is short-hand for the following routes:
   #
@@ -31,9 +30,10 @@ Rails.application.routes.draw do
   # so these will be our routes.
 
   root to: 'links#index'
-  get  '/links/new',     to: 'links#new',    as: 'new_link'
-  post '/links',         to: 'links#create', as: 'links'
-  get  '/l/:short_name', to: 'links#show',   as: 'link'
+  # get  '/links/new',     to: 'links#new',    as: 'new_link'
+  # post '/links',         to: 'links#create', as: 'links'
+  # get  '/l/:short_name', to: 'links#show',   as: 'link'
+  # get  '/users/new',     to: 'users#new',    as: 'new_user'
 
   # "get" tells Rails the HTTP method to look for (GET, in this case)
   # "/l/:short_name" tells Rails the URL pattern(s) to look for
