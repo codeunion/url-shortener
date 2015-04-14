@@ -10,6 +10,8 @@ class Link < ActiveRecord::Base
     },
     :presence => true
 
+  belongs_to :user
+
   def clicked!
     self.clicks_count += 1
     self.save
@@ -24,23 +26,7 @@ class Link < ActiveRecord::Base
   end
 
   private
-    # if valid_uri?(uri)
-    #   if uri has no scheme
-    #     uri = prepend http
-    #     if !valid_uri?(uri)
-    #       error
-    #     end
-    # else
-    #   error
-    # end
-
-    # def url_must_be_well_formed
-    #   uri = URI.parse(url)
-    # rescue URI::BadURIError, URI::InvalidURIError
-    #   self.errors.add(:url, 'is not a valid URL')
-    # end
-
-    # NOT WORKING
+    ### NOT WORKING?
     def validate_url_and_prepend_scheme_if_none!
       uri = URI.parse(url)
       url.prepend("http://") unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)

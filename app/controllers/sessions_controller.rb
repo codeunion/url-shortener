@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def show
   end
 
@@ -17,7 +16,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url, notice: 'Logged in!'
     else
-      ### Likely not best implementation
+      ### IS THERE A BETTER WAY TO SHOW A LOGIN ERROR?
       @user = User.new
       @user.errors.add(:base, 'That email and password were not valid! Please try again.')
       render :new
