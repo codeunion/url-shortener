@@ -6,7 +6,7 @@
   </div>
 <% end %>
 
-<p/><% if current_user %>
+<p/><% if user_signed_in? %>
       Logged in as <%= current_user.email %>.
       <%= link_to 'Log Out', logout_path, :method => :delete %>
     <% else %>
@@ -32,7 +32,10 @@
         <td><%= link_url(link) %></td>
         <td><%= link.url %></td>
         <td><%= link.clicks_count %></td>
-        <td><%= link_to 'Visit link', link, :target => "_blank" %></td>
+        <td><%= link_to 'Visit Link', link, :target => '_blank' %></td>
+        <% if user_signed_out? || (user_signed_in? && link.user == current_user) %>
+          <td><%= link_to 'Delete Link', link, :method => :delete %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

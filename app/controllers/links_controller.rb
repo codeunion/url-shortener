@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  before_filter :authorize, only: [:destroy]
+
   # GET /links
   def index
     if current_user
@@ -11,9 +13,7 @@ class LinksController < ApplicationController
   # GET /l/:short_name
   # See routes.rb for how this is set up.
   def show
-    puts params
     @link = Link.find_by_short_name(params[:short_name])
-    puts "Link: #{@link}"
 
     if @link
       @link.clicked!
@@ -40,9 +40,16 @@ class LinksController < ApplicationController
     end
   end
 
+  def destroy
+    @link = Link.find_by_short_name(params[:short_name])
+    @link.destroy
+
+    redirect_to action: :index, notice: 'Link deleted!'
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def link_params
-      params.require(:link).permit(:url)
+      params.require(:link).permit(:url, :shortname)
     end
 end

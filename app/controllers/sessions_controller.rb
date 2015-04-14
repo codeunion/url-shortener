@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:email])
 
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+      sign_in!(@user)
       redirect_to root_url, notice: 'Logged in!'
     else
       ### IS THERE A BETTER WAY TO SHOW A LOGIN ERROR?
@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
     def session_params
       # params.require(:session).permit(???)
     end

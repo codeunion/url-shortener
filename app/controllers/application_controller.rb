@@ -13,5 +13,23 @@ class ApplicationController < ActionController::Base
       !current_user.nil?
     end
 
-    helper_method :current_user, :user_signed_in?
+    def user_signed_out?
+      current_user.nil?
+    end
+
+    def sign_in!(user)
+      session[:user_id] = user.id
+      @current_user = user
+    end
+
+    def sign_out!
+      @current_user = nil
+      session.delete(:user_id)
+    end
+
+    def authorize
+      redirect_to login_url, alert: 'Please log in to access that.' if user_signed_out?
+    end
+
+    helper_method :current_user, :user_signed_in?, :user_signed_out?, :sign_in!, :sign_out!, :authorize
 end
